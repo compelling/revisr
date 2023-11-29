@@ -58,7 +58,7 @@ class Revisr_DB {
 	 * @return boolean
 	 */
 	private function run( $action, $tables = array(), $args = '' ) {
-
+//      error_log("RUN $action");
 		// An empty status array to update later.
 		$status 	= array();
 
@@ -74,7 +74,8 @@ class Revisr_DB {
 		// The tables we want to run the action on.
 		$tables 	= $tables ? $tables : $this->get_tracked_tables();
 
-		if ( is_callable( array( $class, $method ) ) ) {
+		if (method_exists($class, $method)) { // works with php8
+//		if ( is_callable( array( $class, $method ) ) ) {
 
 			// Construct the class.
 			$class = new $class;
@@ -90,6 +91,8 @@ class Revisr_DB {
 			// Fire off the callback.
 			return $class->callback( $status );
 
+		} else {
+			error_log("not callable:".json_encode(array( $class, $method )));
 		}
 
 	}
@@ -244,7 +247,7 @@ class Revisr_DB {
 		} else {
 			$conn = "-u " . Revisr_Admin::escapeshellarg( DB_USER ) . " " . DB_NAME . $table . " --host " . $db_host . $add_port . $add_socket;
 		}
-
+//      error_log("CONN:".$conn);
 		// Return the connection string.
 		return $conn;
 	}

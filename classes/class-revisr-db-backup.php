@@ -22,7 +22,7 @@ class Revisr_DB_Backup extends Revisr_DB {
 	 * @return array  An array of the results.
 	 */
 	public function backup_table_mysql( $table ) {
-
+//		error_log( "MYSQL $table" );				
 		// Build the connection to use with mysqldump.
 		$conn = $this->build_conn( $table );
 
@@ -33,6 +33,8 @@ class Revisr_DB_Backup extends Revisr_DB {
 		$current_dir = getcwd();
 		chdir( $this->backup_dir );
 		exec( "{$path}mysqldump $conn > revisr_$table.sql --skip-comments", $output, $return_code );
+//		error_log( "EXEC {$path}mysqldump $conn > revisr_$table.sql --skip-comments" );
+//		error_log( "OUTPUT $return_code: " . json_encode($output));
 		chdir( $current_dir );
 
 		// Handle any errors

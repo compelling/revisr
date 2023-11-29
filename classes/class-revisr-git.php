@@ -110,6 +110,7 @@ class Revisr_Git {
 
 		// Run the command.
 		chdir( $this->work_tree );
+//		error_log( "RUN:$safe_path $git_dir $work_tree $safe_cmd $safe_args 2>&1");
 		exec( "$safe_path $git_dir $work_tree $safe_cmd $safe_args 2>&1", $output, $return_code );
 		chdir( $this->current_dir );
 
