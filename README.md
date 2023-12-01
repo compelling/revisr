@@ -87,6 +87,9 @@ Care should be taken when dealing with upgrades that depend on the database. Tak
 
 ## Changelog ##
 
+### 2.1 - Nov 29, 2023 ###
+* Fix: PHP8 support
+
 ### 2.0.2 - December 9, 2015 ###
 * Fix: CSS fixes for WordPress 4.4
 * Fix: Broken settings link on "All Plugins" page
