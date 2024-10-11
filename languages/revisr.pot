@@ -932,10 +932,14 @@ msgstr ""
 msgid "Import database when pulling commits?"
 msgstr ""
 
-#: classes/class-revisr-settings-fields.php:567
+#: classes/class-revisr-settings-fields.php:568
+msgid "Backup database when pulling commits?"
+msgstr ""
+
+#: classes/class-revisr-settings-fields.php:569
 msgid ""
 "If checked, Revisr will automatically import the above tracked tables while "
-"pulling from or checking out a branch. The tracked tables will be backed up "
+"pulling from or checking out a branch. The tracked tables will optionally be backed up "
 "beforehand to provide a restore point immediately prior to the import. Use "
 "this feature with caution and only after verifying that you have a full "
 "backup of your website."

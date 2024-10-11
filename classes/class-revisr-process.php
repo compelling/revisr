@@ -245,7 +245,8 @@ class Revisr_Process {
 		$commits_since = revisr()->git->run( 'log', array( revisr()->git->branch . '..' . revisr()->git->remote . '/' . revisr()->git->branch, '--pretty=oneline' ) );
 
 		// Maybe backup database.
-		if ( revisr()->git->get_config( 'revisr', 'import-pulls' ) === 'true' ) {
+		if ( revisr()->git->get_config( 'revisr', 'import-pulls' ) === 'true' && 
+		     revisr()->git->get_config( 'revisr', 'import-backups' ) === 'true' ) {
 			revisr()->db->backup();
 			$undo_hash = revisr()->git->current_commit();
 			revisr()->git->set_config( 'revisr', 'last-db-backup', $undo_hash );

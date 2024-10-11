@@ -87,7 +87,8 @@ class Revisr_Cron {
 		$commits_since = revisr()->git->run( 'log', array( revisr()->git->branch . '..' . revisr()->git->remote . '/' . revisr()->git->branch, '--pretty=oneline' ) );
 
 		// Maybe backup the database.
-		if ( revisr()->git->get_config( 'revisr', 'import-pulls' ) === 'true' ) {
+		if ( revisr()->git->get_config( 'revisr', 'import-pulls' ) === 'true' && 
+		     revisr()->git->get_config( 'revisr', 'import-backups' ) === 'true' ) {
 			revisr()->db = new Revisr_DB();
 			revisr()->db->backup();
 			$undo_hash = revisr()->git->current_commit();

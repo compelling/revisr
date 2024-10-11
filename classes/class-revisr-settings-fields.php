@@ -554,17 +554,26 @@ class Revisr_Settings_Fields {
 			} else {
 				revisr()->git->run( 'config',  array( '--unset-all', 'revisr.import-pulls' ) );
 			}
+
+			if ( isset( revisr()->options['backup_db'] ) ) {
+				revisr()->git->set_config( 'revisr', 'import-backups', 'true' );
+			} else {
+				revisr()->git->run( 'config',  array( '--unset-all', 'revisr.import-backups' ) );
+			}
 		}
 
 		printf(
 			'<input type="checkbox" id="reset_db" name="revisr_database_settings[reset_db]" %s /><label for="reset_db">%s</label><br><br>
 			<input type="checkbox" id="import_db" name="revisr_database_settings[import_db]" %s /><label for="import_db">%s</label><br><br>
+			<input type="checkbox" id="backup_db" name="revisr_database_settings[backup_db]" %s /><label for="backup_db">%s</label><br><br>
 			<p class="description revisr-description">%s</p>',
 			checked( revisr()->git->get_config( 'revisr', 'import-checkouts' ), 'true', false ),
 			__( 'Import database when changing branches?', 'revisr' ),
 			checked( revisr()->git->get_config( 'revisr', 'import-pulls' ), 'true', false ),
 			__( 'Import database when pulling commits?', 'revisr' ),
-			__( 'If checked, Revisr will automatically import the above tracked tables while pulling from or checking out a branch. The tracked tables will be backed up beforehand to provide a restore point immediately prior to the import. Use this feature with caution and only after verifying that you have a full backup of your website.', 'revisr' )
+			checked( revisr()->git->get_config( 'revisr', 'import-backups' ), 'true', false ),
+			__( 'Backup database when importing database?', 'revisr' ),
+			__( 'If checked, Revisr will automatically import the above tracked tables while pulling from or checking out a branch. The tracked tables will optionally be backed up beforehand to provide a restore point immediately prior to the import. Use this feature with caution and only after verifying that you have a full backup of your website.', 'revisr' )
 		);
 	}
 }

@@ -79,6 +79,9 @@ Care should be taken when dealing with upgrades that depend on the database. Tak
 
 == Changelog ==
 
+= 2.2 - Oct 9, 2024 =
+* New: Database option to backup database before import
+
 = 2.1 - Nov 29, 2023 =
 * Fix: PHP8 support
 

@@ -75,6 +75,14 @@ class Revisr_Compatibility {
 			$import_pulls = 'Disabled';
 		}
 		$return .= 'Import pulls:             ' . $import_pulls . "\n";
+
+		if ( revisr()->git->get_config( 'revisr', 'import-backups' ) === 'true' ) {
+			$import_backups = 'Enabled';
+		} else {
+			$import_backups = 'Disabled';
+		}
+		$return .= 'Import backups:             ' . $import_backups . "\n";
+
 		$return .= 'Work Tree:                ' . revisr()->git->get_work_tree() . "\n";
 		$return .= 'Git Dir:                  ' . revisr()->git->get_git_dir() . "\n";
 
