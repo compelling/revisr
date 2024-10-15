@@ -44,7 +44,8 @@ class Revisr_Process {
 
 		Revisr_Admin::verify_nonce( $_REQUEST['revisr_checkout_nonce'], 'process_checkout' );
 
-		if ( revisr()->git->get_config( 'revisr', 'import-checkouts' ) === 'true' ) {
+		if ( revisr()->git->get_config( 'revisr', 'import-checkouts' ) === 'true' && 
+		     revisr()->git->get_config( 'revisr', 'import-backups' ) === 'true' ) {
 			revisr()->db->backup();
 		}
 
@@ -57,7 +58,9 @@ class Revisr_Process {
 		revisr()->git->reset();
 		revisr()->git->checkout( $branch, $new_branch );
 
-		if ( revisr()->git->get_config( 'revisr', 'import-checkouts' ) === 'true' && $new_branch === false ) {
+		$return_code = revisr()->git->get_config( 'revisr', 'import-checkouts' );
+		error_log( "import-checkouts return_code:".json_encode($return_code)." new_branch:".json_encode($new_branch));
+		if ( $return_code === 'true' && $new_branch === false ) {
 			revisr()->db->import();
 		}
 
